@@ -28,6 +28,9 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 	public void create() {
 		batch = new SpriteBatch();
 		Gdx.input.setInputProcessor(this);
+		gamesound = Gdx.audio.newSound(Gdx.files.internal("sounds/bird.wav"));
+
+
 
 
 
@@ -46,9 +49,17 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public void dispose() {
-
+	gamesound.dispose();
 		batch.dispose();
 
+	}
+
+
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+		long soundid= gamesound.play();
+		gamesound.setVolume( soundid, 0.9f);
+		return false;
 	}
 
 	@Override
@@ -66,10 +77,7 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 		return false;
 	}
 
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
+
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
